@@ -13,9 +13,6 @@ from ETL_MEDS import premeds_cfg
 from src.ETL_MEDS.pre_meds_utils import DATASET_NAME, SUBJECT_ID, get_patient_link, join_and_get_pseudotime_fntr, \
     load_raw_file
 
-# Name of the dataset
-# Column name for admission ID associated with this particular admission
-# Column name for subject ID
 # List of file extensions to be processed
 DATA_FILE_EXTENSIONS = premeds_cfg.raw_data_extensions
 # List of tables to be ignored during processing
@@ -25,8 +22,8 @@ IGNORE_TABLES = []
 def main(cfg: DictConfig) -> None:
     """Performs pre-MEDS data wrangling for INSERT DATASET NAME HERE."""
 
-    logger.info(f"Loading table preprocessors from {PRE_MEDS_CFG}...")
-    preprocessors = OmegaConf.load(PRE_MEDS_CFG)
+    logger.info(f"Loading table preprocessors from {premeds_cfg}...")
+    preprocessors = OmegaConf.load(premeds_cfg)
     functions = {}
 
     input_dir = Path(cfg.raw_input_dir)

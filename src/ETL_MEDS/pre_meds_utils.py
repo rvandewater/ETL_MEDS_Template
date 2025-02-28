@@ -4,8 +4,13 @@ from typing import Callable
 import polars as pl
 from loguru import logger
 
+from ETL_MEDS import premeds_cfg, dataset_info
+
+# Name of the dataset
 DATASET_NAME = dataset_info.dataset_name
+# Column name for admission ID associated with this particular admission
 ADMISSION_ID = premeds_cfg.admission_id
+# Column name for subject ID
 SUBJECT_ID = premeds_cfg.subject_id
 
 
