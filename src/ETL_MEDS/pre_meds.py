@@ -8,7 +8,7 @@ from loguru import logger
 from MEDS_transforms.utils import get_shard_prefix, write_lazyframe
 from omegaconf import DictConfig, OmegaConf
 
-from ETL_MEDS import premeds_cfg
+from . import premeds_cfg
 
 from src.ETL_MEDS.pre_meds_utils import DATASET_NAME, SUBJECT_ID, get_patient_link, join_and_get_pseudotime_fntr, \
     load_raw_file

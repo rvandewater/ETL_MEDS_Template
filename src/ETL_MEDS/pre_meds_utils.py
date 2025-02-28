@@ -4,7 +4,7 @@ from typing import Callable
 import polars as pl
 from loguru import logger
 
-from ETL_MEDS import premeds_cfg, dataset_info
+from . import premeds_cfg, dataset_info
 
 # Name of the dataset
 DATASET_NAME = dataset_info.dataset_name
