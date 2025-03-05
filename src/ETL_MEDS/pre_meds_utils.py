@@ -1,10 +1,10 @@
+from collections.abc import Callable
 from pathlib import Path
-from typing import Callable
 
 import polars as pl
 from loguru import logger
 
-from . import premeds_cfg, dataset_info
+from . import dataset_info, premeds_cfg
 
 # Name of the dataset
 DATASET_NAME = dataset_info.dataset_name
@@ -47,8 +47,8 @@ def get_patient_link(df: pl.LazyFrame) -> (pl.LazyFrame, pl.LazyFrame):
 
 def join_and_get_pseudotime_fntr(
     table_name: str,
-    offset_col: str | list[str],
-    pseudotime_col: str | list[str],
+    offset_col: str | list[str] | None = None,
+    pseudotime_col: str | list[str] | None = None,
     reference_col: str | list[str] | None = None,
     output_data_cols: list[str] | None = None,
     warning_items: list[str] | None = None,
@@ -96,6 +96,9 @@ def join_and_get_pseudotime_fntr(
 
     if reference_col is None:
         reference_col = []
+
+    if offset_col is None:
+        offset_col = []
 
     if isinstance(offset_col, str):
         offset_col = [offset_col]

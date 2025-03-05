@@ -6,12 +6,16 @@ from pathlib import Path
 import polars as pl
 from loguru import logger
 from MEDS_transforms.utils import get_shard_prefix, write_lazyframe
-from omegaconf import DictConfig, OmegaConf
+from omegaconf import DictConfig
 
 from . import premeds_cfg
-
-from .pre_meds_utils import DATASET_NAME, SUBJECT_ID, get_patient_link, join_and_get_pseudotime_fntr, \
-    load_raw_file
+from .pre_meds_utils import (
+    DATASET_NAME,
+    SUBJECT_ID,
+    get_patient_link,
+    join_and_get_pseudotime_fntr,
+    load_raw_file,
+)
 
 # List of file extensions to be processed
 DATA_FILE_EXTENSIONS = premeds_cfg.raw_data_extensions
@@ -23,7 +27,7 @@ def main(cfg: DictConfig) -> None:
     """Performs pre-MEDS data wrangling for INSERT DATASET NAME HERE."""
 
     logger.info(f"Loading table preprocessors from {premeds_cfg}...")
-    preprocessors = OmegaConf.load(premeds_cfg)
+    preprocessors = premeds_cfg
     functions = {}
 
     input_dir = Path(cfg.raw_input_dir)
@@ -44,8 +48,9 @@ def main(cfg: DictConfig) -> None:
         all_fps.extend(input_dir.rglob(f"{ext}"))
 
     for table_name, preprocessor_cfg in preprocessors.items():
-        logger.info(f"  Adding preprocessor for {table_name}:\n{OmegaConf.to_yaml(preprocessor_cfg)}")
-        functions[table_name] = join_and_get_pseudotime_fntr(table_name=table_name, **preprocessor_cfg)
+        if table_name not in ["subject_id", "admission_id", "raw_data_extensions"]:
+            logger.info(f"  Adding preprocessor for {table_name}:\n{preprocessor_cfg}")
+            functions[table_name] = join_and_get_pseudotime_fntr(table_name=table_name, **preprocessor_cfg)
 
     unused_tables = {}
     patient_out_fp = MEDS_input_dir / ""
