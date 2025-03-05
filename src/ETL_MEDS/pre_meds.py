@@ -59,7 +59,7 @@ def main(cfg: DictConfig) -> None:
     else:
         logger.info("Processing patient table...")
 
-        admissions_fp = Path("")
+        admissions_fp = input_dir / "admissions.csv"  # Adjust to the actual path pattern
         logger.info(f"Loading {str(admissions_fp.resolve())}...")
         raw_admissions_df = load_raw_file(admissions_fp)
 
