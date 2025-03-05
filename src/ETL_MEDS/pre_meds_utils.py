@@ -29,7 +29,7 @@ def get_patient_link(df: pl.LazyFrame) -> (pl.LazyFrame, pl.LazyFrame):
     age_in_days = age_in_years * 365.25
 
     pseudo_date_of_birth = admission_time - pl.duration(days=age_in_days)
-    pseudo_date_of_death = admission_time + pl.duration(seconds=pl.col())
+    pseudo_date_of_death = admission_time + pl.duration(seconds=pl.col("some_time_offset_column"))
 
     return (
         df.sort(by="REPLACE_ME_TIME_COLUMN")
