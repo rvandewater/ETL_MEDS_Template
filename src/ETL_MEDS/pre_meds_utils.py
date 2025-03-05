@@ -24,8 +24,9 @@ def get_patient_link(df: pl.LazyFrame) -> (pl.LazyFrame, pl.LazyFrame):
     The output of this process is ultimately converted to events via the `patient` key in the
     `configs/event_configs.yaml` file.
     """
-    admission_time = pl.datetime()
-    age_in_years = pl.col()
+    # Many datasets have anonymized the time and use offsets
+    admission_time = pl.datetime(year=2021, month=1, day=1, hour=0, minute=0, second=0)
+    age_in_years = pl.col("REPLACE_ME_AGE_COLUMN")
     age_in_days = age_in_years * 365.25
 
     pseudo_date_of_birth = admission_time - pl.duration(days=age_in_days)
