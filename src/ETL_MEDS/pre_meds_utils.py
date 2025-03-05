@@ -143,7 +143,7 @@ def join_and_get_pseudotime_fntr(
         # Join the patient table to the data table, INSPIRE only has subject_id as key
         joined = df.join(patient_df.lazy(), on=ADMISSION_ID, how="inner")
         if len(reference_col) > 0:
-            joined = joined.join(references_df, left_on=reference_col, right_on="REPLACE_ME")
+            joined = joined.join(references_df, left_on=reference_col, right_on="some_valid_reference_column")
         return joined.select(SUBJECT_ID, ADMISSION_ID, *pseudotimes, *output_data_cols)
 
     return fn
