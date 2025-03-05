@@ -72,7 +72,7 @@ def main(cfg: DictConfig) -> None:
         references_df = pl.read_parquet(references_out_fp, use_pyarrow=True).lazy()
     else:
         logger.info("Processing references table first...")
-        references_fp = Path("")
+        references_fp = input_dir / "references.csv"  # Adjust to the actual path pattern
         logger.info(f"Loading {str(references_fp.resolve())}...")
         references_df = load_raw_file(references_fp)
         write_lazyframe(references_df, references_out_fp)
