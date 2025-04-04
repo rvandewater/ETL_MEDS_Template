@@ -15,8 +15,7 @@ SUBJECT_ID = premeds_cfg.subject_id
 
 
 def get_patient_link(df: pl.LazyFrame) -> (pl.LazyFrame, pl.LazyFrame):
-    """
-    Process the operations table to get the patient table and the link table.
+    """Process the operations table to get the patient table and the link table.
 
     As dataset may store only offset times, note here that we add a CONSTANT TIME ACROSS ALL PATIENTS for the
     true timestamp of their health system admission.
