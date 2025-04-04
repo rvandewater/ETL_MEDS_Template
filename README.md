@@ -157,6 +157,18 @@ The test file (and the internal doctests, which can help unittest your `pre-MEDS
 also be run on pull requests or pushes to the `main` branch of your repository via GitHub Actions, and test
 code coverage will be tracked via CodeCov.
 
+#### `.pre-commit-config`
+This will run pre-commit hooks on GitHub when you're creating your ETL. To locally install this, you can install the optional dependencies:
+```
+ pip install ".[dev]"
+```
+Then, run:
+```
+pre-commit run --all-files
+```
+This will automatically reformat your files (if possible) to conform with the linting requirements.
+Note: currently we need pre-commit<4 to run the `docformatter` hook.
+
 ### External Services
 
 #### CodeCov
