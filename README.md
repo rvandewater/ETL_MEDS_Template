@@ -37,6 +37,9 @@ See the [MIMIC-IV MEDS Extraction ETL](https://github.com/Medical-Event-Data-Sta
     - CodeCov
     - PyPI
 
+Before writing `event_configs.yaml`, work through the
+[dataset mapping checklist](docs/MEDS_ETL_MAPPING.md).
+
 ### Code Points:
 
 #### `pyproject.toml`
